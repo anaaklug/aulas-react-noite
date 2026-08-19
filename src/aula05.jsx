@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Checkbox } from 'expo-checkbox';
 import { 
     View, 
     Text, 
@@ -9,11 +10,27 @@ import {
 } from 'react-native';
 
 class Aula05 extends Component {
+
+  // Construtor - forma tradicional de inicializar estados (dados)
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      nome: '',
+      email: '',
+      lembrarSenha: false
+    };
+  }
+
   render() {
     return (
       <View style={styles.container}>
         
         <View>
+
+            <View>
+              <Text style={styles.login}>LOGIN</Text>
+            </View>
 
             <Image
                 source={ require('../img/logo-barao.png') }
@@ -31,6 +48,18 @@ class Aula05 extends Component {
                 style={ styles.input }
                 placeholder='Informe seu e-mail: '
             />
+
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+              <View style={{flex: 1, flexDirection: 'row'}}>
+                  <Checkbox
+                    value={this.state.lembrarSenha}
+                    onValueChange={(valor) => this.setState({lembrarSenha: valor})}
+                    color={this.state.lembrarSenha ? '#4630eb': undefined}
+                  />
+                  <Text style={{color: 'white', marginLeft: 3, fontSize: 12 }}>Lembrar senha</Text>
+              </View>
+              <Text style={{color: '#39FF14', fontSize: 12}}>Esqueceu a senha?</Text>
+            </View>
 
             <TouchableOpacity style={ styles.botao }>
                 <Text style={ styles.textoBotao }>Entrar</Text>
@@ -56,6 +85,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
 
+  login: {
+    color: '#12b434', 
+    textAlign: 'center', 
+    fontSize: 32,
+    fontWeight: 'bold', 
+  },
+
   input: {
     width: 250,
     borderWidth: 1,
@@ -75,10 +111,11 @@ const styles = StyleSheet.create({
   },
   
   logo: {
-    width: 120,
-    height: 120,
+    width: 125,
+    height: 125,
     alignSelf: 'center',
-    marginBottom: 70,
+    marginBottom: 20,
+    marginTop: 20,
   },
 
   botao: {
@@ -92,5 +129,20 @@ const styles = StyleSheet.create({
   textoBotao: {
     color: 'white',
     textAlign: 'center',
-  }
+  },
+
+  texto1: {
+    color: 'white',
+    fontSize: 15,
+    marginTop: 6,
+    textAlign: 'center',
+  },
+
+  texto2: {
+    color: '#39FF14',
+    //marginRight: 20,
+    fontSize: 15,
+    marginLeft: 10,
+    
+  },
 });
